@@ -103,8 +103,9 @@ const handleInput = async ({ target: { value } }) => {
     if (!inputValue) {
       return;
     }
+    const user = await getUser(inputValue);
 
-    const [user, followers, repos] = await Promise.all([getUser(inputValue), getFollowers(inputValue, 6), getRepositories(inputValue)])
+    const [followers, repos] = await Promise.all([getFollowers(inputValue, 6), getRepositories(inputValue)])
 
     showProfile(user, followers, repos);
   } catch (error) {
